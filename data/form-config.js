@@ -62,6 +62,31 @@ export const formConfig = {
             },
           },
         },
+        {
+          id: "accountType",
+          name: "accountType",
+          label: "Account Type",
+          type: "radio",
+          required: true,
+          inline: true,
+          options: [
+            { value: "personal", label: "Personal" },
+            { value: "business", label: "Business" },
+          ],
+          validation: {
+            required: "Please select an account type",
+          },
+        },
+        {
+          id: "termsAndConditions",
+          name: "termsAndConditions",
+          label: "I agree to the Terms and Conditions",
+          type: "checkbox",
+          required: true,
+          validation: {
+            required: "You must agree to the Terms and Conditions",
+          },
+        },
       ],
     },
     {
@@ -86,6 +111,16 @@ export const formConfig = {
           label: "Last Name",
           type: "text",
           placeholder: "Doe",
+          required: true,
+          validation: {
+            required: "This field is required",
+          },
+        },
+        {
+          id: "birthDate",
+          name: "birthDate",
+          label: "Birth Date",
+          type: "date",
           required: true,
           validation: {
             required: "This field is required",
@@ -135,6 +170,22 @@ export const formConfig = {
           ],
           validation: {
             required: "This field is required",
+          },
+        },
+        {
+          id: "employmentStatus",
+          name: "employmentStatus",
+          label: "Employment Status",
+          type: "radio",
+          required: true,
+          options: [
+            { value: "employed", label: "Employed" },
+            { value: "self-employed", label: "Self-Employed" },
+            { value: "unemployed", label: "Unemployed" },
+            { value: "student", label: "Student" },
+          ],
+          validation: {
+            required: "Please select your employment status",
           },
         },
       ],
@@ -204,6 +255,69 @@ export const formConfig = {
             },
           },
         },
+        {
+          id: "privacySettings",
+          name: "privacySettings",
+          label: "Privacy Settings",
+          type: "radio",
+          required: true,
+          options: [
+            { value: "public", label: "Public Profile" },
+            { value: "private", label: "Private Profile" },
+            { value: "friends", label: "Friends Only" },
+          ],
+          validation: {
+            required: "Please select your privacy settings",
+          },
+        },
+        {
+          id: "experience",
+          name: "experience",
+          label: "Years of Experience",
+          type: "range",
+          min: 0,
+          max: 20,
+          step: 1,
+          showValue: true,
+          required: true,
+          validation: {
+            required: "Please indicate your years of experience",
+          },
+        }
+      ],
+    },
+    {
+      id: "additional-info",
+      title: "Additional Information",
+      subtitle: "Tell about yourself",
+      fields: [
+        {
+          id: "bio",
+          name: "bio",
+          label: "Biography",
+          type: "textarea",
+          placeholder: "Tell us about yourself...",
+          required: true,
+          rows: 4,
+          fullWidth: true,
+          validation: {
+            required: "This field is required",
+          },
+        },
+        {
+          id: "documents",
+          name: "documents",
+          label: "Upload Multiple Files",
+          type: "file",
+          accept: "*/*", // Accept all file types
+          multiple: true,
+          maxSize: 10485760, // 10MB
+          required: true,
+          fullWidth: true,
+          validation: {
+            required: "Please upload at least one document",
+          },
+        }
       ],
     },
   ],

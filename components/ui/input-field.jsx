@@ -10,23 +10,65 @@ export default function InputField({
   placeholder,
   error,
   required = false,
+  min,
+  max,
+  step,
+  pattern,
+  accept,
+  multiple,
+  autoComplete,
+  disabled = false,
+  readOnly = false,
+  className = "",
 }) {
   return (
-    <div>
-      <label htmlFor={id} className={`block text-sm font-medium ${error ? "text-red-500" : "text-gray-700"} mb-1`}>
-        {label}
-      </label>
-      <input
-        type={type}
-        id={id}
-        name={name}
-        value={value}
-        onChange={onChange}
-        className={`w-full px-3 py-2 border ${error ? "border-red-500" : "border-gray-300"} rounded-md`}
-        placeholder={placeholder}
-        required={required}
-      />
-      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+    <div className="group">
+      {label && (
+        <label
+          htmlFor={id}
+          className={`block text-sm font-medium mb-2 transition-colors ${
+            error ? "text-red-500" : "text-gray-700 group-hover:text-indigo-600"
+          }`}
+        >
+          {label}
+          {required && <span className="text-red-500 ml-1">*</span>}
+        </label>
+      )}
+      <div className="relative">
+        <input
+          type={type}
+          id={id}
+          name={name}
+          value={value || ""}
+          onChange={onChange}
+          className={`w-full px-4 py-3 bg-white border rounded-lg transition-all duration-200 ${
+            error ? "border-red-300 focus:border-red-500" : "border-gray-300 focus:border-indigo-500"
+          } ${disabled ? "opacity-60 cursor-not-allowed" : ""} ${className}`}
+          placeholder={placeholder}
+          required={required}
+          min={min}
+          max={max}
+          step={step}
+          pattern={pattern}
+          accept={accept}
+          multiple={multiple}
+          autoComplete={autoComplete}
+          disabled={disabled}
+          readOnly={readOnly}
+        />
+      </div>
+      {error && (
+        <p className="mt-2 text-sm text-red-500 flex items-center">
+          <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path
+              fillRule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+              clipRule="evenodd"
+            />
+          </svg>
+          {error}
+        </p>
+      )}
     </div>
   )
 }

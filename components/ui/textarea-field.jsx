@@ -1,20 +1,20 @@
 "use client"
 
-import { useState } from "react"
-import { EyeIcon, EyeOffIcon } from "lucide-react"
-
-export default function PasswordField({
+export default function TextareaField({
   id,
   name,
   label,
   value,
   onChange,
-  placeholder = "••••••••",
+  placeholder,
   error,
   required = false,
+  rows = 4,
+  maxLength,
+  disabled = false,
+  readOnly = false,
+  className = "",
 }) {
-  const [showPassword, setShowPassword] = useState(false)
-
   return (
     <div className="group">
       <label
@@ -27,27 +27,23 @@ export default function PasswordField({
         {required && <span className="text-red-500 ml-1">*</span>}
       </label>
       <div className="relative">
-        <input
-          type={showPassword ? "text" : "password"}
+        <textarea
           id={id}
           name={name}
-          value={value}
+          value={value || ""}
           onChange={onChange}
-          className={`w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-opacity-50 ${
+          rows={rows}
+          className={`w-full px-4 py-3 bg-gray-50 border rounded-lg transition-all duration-200 focus:ring-2 focus:ring-opacity-50 ${
             error
               ? "border-red-300 focus:border-red-500 focus:ring-red-200"
               : "border-gray-200 focus:border-indigo-500 focus:ring-indigo-200 group-hover:border-indigo-200"
-          }`}
+          } ${disabled ? "opacity-60 cursor-not-allowed" : ""} ${className}`}
           placeholder={placeholder}
           required={required}
+          maxLength={maxLength}
+          disabled={disabled}
+          readOnly={readOnly}
         />
-        <button
-          type="button"
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-indigo-600 transition-colors"
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
-        </button>
       </div>
       {error && (
         <p className="mt-2 text-sm text-red-500 flex items-center">
